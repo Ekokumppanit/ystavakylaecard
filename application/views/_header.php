@@ -15,11 +15,15 @@ if (empty($page_title)) {
     <link rel="icon" href="<?php echo site_url('/favicon.ico'); ?>">
     <title><?php echo implode(" &raquo; ", $page_title); ?></title>
 <?php
-    assets_css(array(
-        'normalize.min.css',
-        'foundation.min.css',
-        'style.css'
-    ));
+    // Assets spark
+    assets_css(
+        array(
+            'normalize.min.css',
+            'foundation.min.css',
+            'jquery-ui.min.css',
+            'style.css'
+        )
+    );
 ?>
 
 </head>

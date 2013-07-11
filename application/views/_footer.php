@@ -9,16 +9,22 @@
         </div>
     </footer>
 
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/foundation/4.1.6/js/vendor/jquery.min.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/foundation/4.1.6/js/vendor/custom.modernizr.min.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/foundation/4.1.6/js/foundation.min.js"></script>
-    <script src="http://rvera.github.io/image-picker/image-picker/image-picker.min.js"></script>
-    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
-    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.min.js"></script>
-    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/localization/messages_fi.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.3/css/base/jquery.ui.all.min.css">
-    <script src="<?php echo base_url("/assets/scripts.js"); ?>"></script>
+<?php
+    // Assets spark
+    assets_js(
+        array(
+            'jquery.min.js',
+            'custom.modernizr.min.js',  // Foundation flavored Modernizr
+            'foundation.min.js',        // Foundation 1.4.1
+            'image-picker.min.js',      // Image Picker 0.1.4
+            'jquery.validate.min.js',   // jQuery Validation Plugin 1.11.1
+            'additional-methods.min.js',// jQuery Validation Methods
+            'messages_fi.js',           // jQuery Validation Plugin Finnish translation
+            'jquery-ui.min.js',         // jQuery UI 1.10.3
+            'scripts.js'                // Our scripts
+        )
+    );
+?>
 
 <!-- {elapsed_time} -->
 </body>
