@@ -94,7 +94,7 @@ class Welcome extends CI_Controller
             $this->load->view('_footer', $data);
 
         }
-        # code...
+
     }
 
     public function upload()

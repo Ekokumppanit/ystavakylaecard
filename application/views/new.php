@@ -9,8 +9,6 @@
                 Suunnittele oma eKorttisi ja lähetä se ystävällesi!
                 Samalla voit osallistua arvontaan josta voit voittaa huikean hienoja palkintoja.
             </p>
-
-
         </div>
     </div>
 </div>

@@ -1,5 +1,4 @@
 <?php
-
 $ci = &get_instance();
 
 $data = array(
