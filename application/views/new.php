@@ -187,6 +187,19 @@ if (! empty($images)) {
                 <img id="previewimage" src="http://dummyimage.com/800x600/4d494d/686a82.gif&text=placeholder+image">
             </div>
         </div>
+
+<?php if (ENVIRONMENT == "development"): ?>
+        <div class="panel toteutuva">
+            <a href="javascript:return false;" class="updatepreview">
+                <img src="http://dummyimage.com/800x600/4d494d/686a82.gif&text=toteutuva" width="800" height="600">
+            </a>
+            <small class="url"></small>
+        </div>
+
+
+<?php
+endif;
+?>
         <div class="panel">
             <p>Tiedot kerätään vain postikorttien lähettämiseen ja halutessasi arvontaan osallistumista varten.</p>
         </div>
