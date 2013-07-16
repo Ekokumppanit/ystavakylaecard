@@ -45,7 +45,6 @@ jQuery(document).ready(function($) {
         $('div#message_text_preview').text(message_text_preview_text);
     });
 
-
     // Sizing and placement of preview elements
     $('#message_title_preview, #message_text_preview')
         .draggable({
@@ -80,11 +79,11 @@ jQuery(document).ready(function($) {
             }
         });
 
-
+    // Set panel height on initiation
     $('#previewpanel').height( $('#previewimage').height() );
 
-    setElementPlaces();
-    checkSizesTimer();
+    setElementPlaces(); // Populate our image place fields
+    checkSizesTimer();  // If we change window size, make everything adjust
 
     /**
      * checkSizesTimer changes inputs

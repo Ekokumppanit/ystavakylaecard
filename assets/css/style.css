@@ -21,11 +21,28 @@ h1, h2, h3 {
     font-family: Georgia, 'Sans serif';
 }
 
+.center {
+    text-align: center;
+}
+.center * {
+    margin: 0 auto;
+}
+
 .top-bar-section .adminmenu > a {
-    background-color: #333 !important;
+    background-color: #805219 !important;
 }
 .top-bar-section .adminmenu a.logout {
     background-color: #900 !important;
+}
+
+.pagefooter a {
+    color: #333;
+    border-bottom: 1px dashed #333;
+    margin: 0 2px;
+}
+.pagefooter a:hover {
+    color: #000;
+    border-bottom: none;
 }
 
 .progress span {
@@ -37,13 +54,13 @@ h1, h2, h3 {
 }
 
 .progress span.queue {
-    background: #111;
+    background: #699938;
 }
 .progress span.public {
-    background: #333;
+    background: #9ecb45;
 }
 .progress span.private {
-    background: #555;
+    background: #f69637;
 }
 .progress span.hidden {
     background: #777;
@@ -112,6 +129,8 @@ h1, h2, h3 {
     left: 0px;
     border: 1px solid #333;
     z-index: 1;
+    width: 100%;
+    height: auto;
 }
 
 .postcard_preview {
@@ -135,8 +154,7 @@ h1, h2, h3 {
     color:      #fff;
     text-shadow: 0px 0px 10px rgba(150, 150, 150, 1);
     width:      90%;
-    cursor:     move;
-    border:     1px dashed #666;
+    border:     1px dashed transparent;
 }
 #message_title_preview {
     top:        20px;
@@ -150,6 +168,8 @@ h1, h2, h3 {
 
 .ui-draggable-dragging,
 .ui-resizable-resizing {
+    cursor:     move;
+    border:     1px dashed #666;
     background: #fff;
     background: rgba(255, 255, 255, 0.5);
 }

@@ -29,7 +29,7 @@
                             </div>
                             <div class="small-12 large-9 columns">
                                 <input required type="text" id="sender_name"
-                                    name="sender_name" placeholder="Lähettäjän nimi">
+                                    name="sender_name" value="" placeholder="Lähettäjän nimi">
                             </div>
                         </div>
                         <div class="row">
@@ -38,7 +38,7 @@
                             </div>
                             <div class="small-12 large-9 columns">
                                 <input required type="email" id="sender_email"
-                                    name="sender_email" placeholder="Lähettäjän email">
+                                    name="sender_email" value="" placeholder="Lähettäjän email">
                             </div>
                         </div>
                     </div>
@@ -53,7 +53,7 @@
                             </div>
                             <div class="small-12 large-9 columns">
                                 <input required type="text" id="receiver_name"
-                                    name="receiver_name" placeholder="Vastaanottajan nimi">
+                                    name="receiver_name" value="" placeholder="Vastaanottajan nimi">
                             </div>
                         </div>
                         <div class="row">
@@ -62,7 +62,7 @@
                             </div>
                             <div class="small-12 large-9 columns">
                                 <input required type="email" id="receiver_email"
-                                    name="receiver_email" placeholder="Vastaanottajan email">
+                                    name="receiver_email" value="" placeholder="Vastaanottajan email">
                             </div>
                         </div>
                     </div>
@@ -79,12 +79,12 @@
 <?php
 if (! empty($images)) {
     foreach ($images as $i => $image) {
+        $name = pathinfo($image, PATHINFO_FILENAME);
 
-        ?>                            <option data-img-src='<?php echo
-                                $image;
+        ?>                            <option data-img-src='<?php echo $image;
                             ?>' value='<?php
-                                echo $i;
-                            ?>'>Cute Kitten <?=$i;?></option><?php
+                                echo $image;
+                            ?>'>Kuva: <?=$name;?></option><?php
             echo "\n";
     }
 }
@@ -102,7 +102,7 @@ if (! empty($images)) {
                     </div>
                     <div class="small-12 large-9 columns">
                         <input type="text" maxlength="200" id="message_title"
-                            name="message_title" placeholder="Moikka!">
+                            name="message_title" value="" placeholder="Moikka!">
                     </div>
                 </div>
                 <div class="row">
@@ -165,9 +165,6 @@ if (! empty($images)) {
                         <input type="submit" id="submit" class="button" value="Lähetä eKorttisi!" name="submit">
                     </div>
                 </div>
-
-
-
 
             </form>
 

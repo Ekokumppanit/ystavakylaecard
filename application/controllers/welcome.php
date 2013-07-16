@@ -95,6 +95,8 @@ class Welcome extends CI_Controller
 
         }
 
+        return false;
+    }
     }
 
     public function upload()

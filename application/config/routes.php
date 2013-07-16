@@ -46,7 +46,7 @@ if (empty($route)) {
 }
 
 $route['default_controller'] = "welcome";
-$route['404_override']       = 'error404';
+$route['404_override']       = 'welcome/error404';
 
 $route['uusi']               = $route['default_controller']."/newCard";
 $route['kaikki']             = $route['default_controller']."/ecards";

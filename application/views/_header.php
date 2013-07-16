@@ -7,14 +7,14 @@ if (empty($page_title)) {
 }
 
 ?><!DOCTYPE html>
-<!--[if IE 8]>    <html class="no-js lt-ie9" lang="fi"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="fi"> <!--<![endif]-->
+<!--[if IE 8]><html class="no-js lt-ie9" lang="fi"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="fi"><!--<![endif]-->
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" href="<?php echo site_url('/favicon.ico'); ?>">
     <title><?php echo implode(" &raquo; ", $page_title); ?></title>
-<?php
+    <?php
     // Assets spark
     assets_css(
         array(
@@ -44,29 +44,30 @@ if (empty($page_title)) {
             <section class="top-bar-section">
                 <ul class="left">
                     <li class="divider"></li>
-                    <li><a class="active" href="<?php echo site_url("uusi"); ?>">Luo omasi!</a></li>
+                    <li><?= lnk("uusi", "Luo omasi!"); ?></li>
                     <li class="divider"></li>
-                    <li><a href="<?php echo site_url("kaikki"); ?>">Listaa kaikki</a></li>
+                    <li><?= lnk("kaikki", "Listaa kaikki"); ?></li>
                     <li class="divider"></li>
                     <li class="has-dropdown">
-                        <a href="<?php echo site_url("info"); ?>">Tietoa</a>
+                        <?= lnk("info", "Tietoa"); ?>
                         <ul class="dropdown">
-                            <li><a href="<?php echo site_url("info"); ?>#rekisteri">Rekisteriseloste</a></li>
-                            <li><a href="<?php echo site_url("info"); ?>#yhteystiedot">Yhteystiedot</a></li>
+                            <li><?= lnk("info#rekisteri", "Rekisteriseloste"); ?></li>
+                            <li><?= lnk("info#yhteystiedot", "Yhteystiedot"); ?></li>
                         </ul>
                     </li>
                 </ul>
-
 <?php
 if (isset($user) and ! empty($user)) {
+
+
     ?>
 
                 <ul class="left">
                     <li class="has-dropdown adminmenu">
-                        <a href="<?php echo site_url("yllapito"); ?>">Ylläpito</a>
+                        <a href="<?php echo site_url("yllapito"); ?>">
                         <ul class="dropdown">
                             <li class="has-dropdown">
-                                <a href="<?php echo site_url("yllapito/kortit"); ?>">Hallitse kortteja</a>
+                                <?= lnk("yllapito/ecards", "Hallitse kortteja"); ?>
                                 <ul class="dropdown">
                                     <li>
                                         <a href="<?php echo site_url("yllapito/ecards/moderate");?>">
