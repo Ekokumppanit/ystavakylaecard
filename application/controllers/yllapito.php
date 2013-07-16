@@ -9,7 +9,10 @@ class Yllapito extends CI_Controller
     {
         parent::__construct();
         $this->load->model('ecard_model', 'ecard');
+        $this->load->model('user_model', 'users');
         $this->load->model('erkanaauth_model', 'erkana');
+
+        $this->load->helper('date');
 
         $this->user = $this->erkana->getUser();
 
@@ -114,6 +117,48 @@ class Yllapito extends CI_Controller
         }
 
         $data['page_title'] = array_merge($page_title, $data['page_title']);
+
+        $this->load->view('_header', $data);
+        $this->load->view($page, $data);
+        $this->load->view('_footer', $data);
+    }
+
+    public function users($section = 'listall', $user_id = null, $action = null)
+    {
+        if (empty($this->user)) {
+            redirect("/yllapito/kirjaudu");
+        }
+
+        $data = array(
+            'page_title'    => array( 'Ystäväkylä eKortti' ),
+            'page_classes'  => array( 'frontpage' ),
+            'user'          => $this->user,
+            'count'         => $this->card_count,
+            'messages'      => $this->session->flashdata('messages')
+        );
+        $page_title = array();
+
+        switch ($section) {
+            case 'modify':
+                if ($action == "delete" && is_numeric($user_id)) {
+                    $this->user->delete($user_id);
+                }
+                redirect("yllapito/users");
+                break;
+            case 'show':
+                $data['userid'] = $user_id;
+                $data['userdata'] = $this->users->get($user_id);
+                $page_title = array("Tiedot", "Käyttäjät");
+                break;
+            default:
+                $data['users'] = $this->users->get_all();
+                $page_title = array("Listaa kaikki", "Käyttäjät");
+                break;
+        }
+
+
+        $data['page_title'] = array_merge($page_title, $data['page_title']);
+        $page = 'yllapito/users_'.$section;
 
         $this->load->view('_header', $data);
         $this->load->view($page, $data);
