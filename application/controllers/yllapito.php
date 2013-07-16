@@ -37,6 +37,89 @@ class Yllapito extends CI_Controller
         $this->load->view('_footer', $data);
     }
 
+    public function ecards($section = 'list')
+    {
+        if (empty($this->user)) {
+            redirect("/yllapito/kirjaudu");
+        }
+
+        $data = array(
+            'page_title'    => array( 'Ystäväkylä eKortti' ),
+            'page_classes'  => array( 'frontpage' ),
+            'user'          => $this->user,
+            'count'         => $this->card_count,
+            'messages'      => $this->session->flashdata('messages')
+        );
+
+        $page_title = array();
+
+        switch ($section) {
+            case 'save':
+                $page       = 'yllapito/list_cards';
+                $post       = $this->input->post();
+                $from_page  = $this->input->post('from_page');
+                $post       = $this->ecard->formatPost($post);
+
+                $save = false;
+                if (! empty($post)) {
+                    $save = $this->ecard->saveCards($post);
+                }
+
+                if (empty($save)) {
+                    $this->session->flashdata('message', 'Tallennus onnistui');
+                    $this->session->keep_flashdata('message');
+                    redirect($from_page);
+                } else {
+                    $this->session->flashdata('message', 'Tallennus epäonnistui');
+                    $this->session->keep_flashdata('message');
+                    redirect($from_page);
+                }
+                break;
+            case 'queue':
+                $page = "yllapito/list_cards";
+                $page_title[] = "Jonossa";
+                $page_classes = array('admin', 'ecards', 'queue');
+                $limit = $section;
+                break;
+            case 'public':
+                $page = "yllapito/list_cards";
+                $page_title[] = "Julkisia";
+                $page_classes = array('admin', 'ecards', 'public');
+                $limit = $section;
+                break;
+            case 'private':
+                $page = "yllapito/list_cards";
+                $page_title[] = "Yksityisiä";
+                $page_classes = array('admin', 'ecards', 'private');
+                $limit = $section;
+                break;
+            case 'hidden':
+                $page = "yllapito/list_cards";
+                $page_title[] = "Piilotetut";
+                $page_classes = array('admin', 'ecards', 'hidden');
+                $limit = $section;
+                break;
+            default:
+                $page = "yllapito/list_cards";
+                $page_title[] = "Kaikki";
+                $limit = null;
+                $page_classes = array('admin', 'ecards', 'list_all');
+                break;
+        }
+
+        if (empty($limit)) {
+            $data['cards'] = $this->ecard->order_by('created_at')->get_all();
+        } else {
+            $data['cards'] = $this->ecard->order_by('created_at')->get_many_by('card_status', $limit);
+        }
+
+        $data['page_title'] = array_merge($page_title, $data['page_title']);
+
+        $this->load->view('_header', $data);
+        $this->load->view($page, $data);
+        $this->load->view('_footer', $data);
+    }
+
     public function kirjaudu()
     {
         // POST

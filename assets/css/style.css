@@ -8,6 +8,8 @@ html {
 body {
     color: #333;
     background: transparent url('../img/headerbg2.png') top center no-repeat;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
 }
 
 body footer {
@@ -43,6 +45,19 @@ table.valign thead tr,
 table thead th button {
     margin: 0px;
 }
+#cardlist td label {
+    display: block;
+}
+#cardlist td label input {
+    margin-right: 10px;
+    padding: 0px;
+    margin-bottom: 0px !important;
+}
+
+#cardlist img {
+    margin-bottom: 3px;
+}
+
 .center {
     text-align: center;
 }
