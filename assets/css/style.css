@@ -21,6 +21,28 @@ h1, h2, h3 {
     font-family: Georgia, 'Sans serif';
 }
 
+input:disabled, label.disabled {
+    text-decoration: line-through;
+}
+
+table {
+    width: 100%;
+}
+table.valign thead tr,
+.valign {
+    vertical-align: middle;
+}
+
+.zebra {
+    background: #aeaeae;
+}
+
+.valign-top {
+    vertical-align: top;
+}
+table thead th button {
+    margin: 0px;
+}
 .center {
     text-align: center;
 }
@@ -139,14 +161,6 @@ h1, h2, h3 {
     background: #333;
 }
 
-#message_title_preview {
-    font-size: 30px;
-    font-weight: bold;
-}
-#message_text_preview {
-    font-size: 18px;
-}
-
 #message_title_preview,
 #message_text_preview {
     position:   relative;
@@ -159,13 +173,22 @@ h1, h2, h3 {
 #message_title_preview {
     top:        20px;
     left:       10px;
+    font-size:  30px;
+    font-weight: 700;
 }
 #message_text_preview {
     top:        40px;
     left:       10px;
+    font-size: 20px;
+    line-height: 140%;
     white-space: pre;
 }
 
+.toteutuva .url {
+    white-space: pre;
+}
+
+#previewpanel:hover .ui-draggable,
 .ui-draggable-dragging,
 .ui-resizable-resizing {
     cursor:     move;

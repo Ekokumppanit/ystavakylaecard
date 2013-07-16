@@ -2,11 +2,17 @@
 
 class Welcome extends CI_Controller
 {
+    private $user;
+    public $card_count;
 
     public function __construct()
     {
         parent::__construct();
         $this->load->model('ecard_model', 'ecard');
+        $this->load->model('erkanaauth_model', 'erkana');
+
+        $this->user = $this->erkana->getUser();
+        $this->card_count = $this->ecard->countStatuses();
     }
 
     public function index()
@@ -14,7 +20,9 @@ class Welcome extends CI_Controller
 
         $data = array(
             'page_title'    => array( 'Etusivu', 'Ystäväkylä eKortti' ),
-            'page_classes'  => array( 'frontpage' )
+            'page_classes'  => array( 'frontpage' ),
+            'count'         => $this->card_count,
+            'user'          => $this->user
         );
 
         $this->load->view('_header', $data);
@@ -26,7 +34,9 @@ class Welcome extends CI_Controller
     {
         $data = array(
             'page_title'    => array( 'Tietoa', 'Ystäväkylä eKortti' ),
-            'page_classes'  => array( 'info' )
+            'page_classes'  => array( 'info' ),
+            'count'         => $this->card_count,
+            'user'          => $this->user
         );
 
         $this->load->view('_header', $data);
@@ -40,15 +50,9 @@ class Welcome extends CI_Controller
         $data = array(
             'page_title'    => array( 'Uusi eKortti', 'Ystäväkylä eKortti' ),
             'page_classes'  => array( 'new_card' ),
-
-            'images'        => array(
-                                "http://placekitten.com/800/550",
-                                "http://placekitten.com/g/800/550",
-                                "http://placekitten.com/800/551",
-                                "http://placekitten.com/g/800/551",
-                                "http://placekitten.com/800/552",
-                                "http://placekitten.com/g/800/552"
-            )
+            'count'         => $this->card_count,
+            'images'        => fetchBaseCards(),
+            'user'          => $this->user
         );
 
         $this->load->view('_header', $data);
@@ -59,7 +63,9 @@ class Welcome extends CI_Controller
     public function ecards($card_id = null)
     {
         $data = array(
-            'page_classes' => array( 'ecards' )
+            'page_classes'  => array( 'ecards' ),
+            'count'         => $this->card_count,
+            'user'          => $this->user
         );
 
         if (empty($card_id)) {
@@ -85,6 +91,8 @@ class Welcome extends CI_Controller
                 $data['ecard']->id              = $card_id;
                 $data['ecard']->response        = "error";
                 $data['ecard']->response_text   = "No card found with that id";
+            } else {
+                $data['ecard']->response        = 200;
             }
 
             $data['page_classes'][] = 'show_one';
@@ -97,11 +105,85 @@ class Welcome extends CI_Controller
 
         return false;
     }
+
+    public function preview($urldata = null)
+    {
+        if (empty($urldata)) {
+            return false;
+        }
+
+        $data = array();
+        $rawdata = explode(",", urldecode($urldata));
+        foreach ($rawdata as $dataline) {
+            list($key, $value) = explode("=", $dataline);
+
+            $value = str_replace(";-;", "\r", $value);
+            $value = str_replace(";:;", "\n", $value);
+            $data[$key] = urldecode($value);
+        }
+
+        $opts  = parseImageOptions($data);
+
+        $imgresource = $this->ecard->createCard(
+            $opts['cardPath'],
+            $opts['cardHead'],
+            $opts['cardText'],
+            $opts['cardHeadPlace'],
+            $opts['cardTextPlace'],
+            $opts['cardHeadSize'],
+            $opts['cardTextSize'],
+            $opts['cardSize']
+        );
+
+        $this->ecard->showCard($imgresource);
     }
 
-    public function upload()
+    public function saveCard()
     {
-        # code...
+        $image = $this->input->post();
+
+        if (empty($image)) {
+            redirect("uusi");
+        }
+
+        $opts  = parseImageOptions($image);
+        $entry = parseCardEntryValues($image);
+
+        $imgresource = $this->ecard->createCard(
+            $opts['cardPath'],
+            $opts['cardHead'],
+            $opts['cardText'],
+            $opts['cardHeadPlace'],
+            $opts['cardTextPlace'],
+            $opts['cardHeadSize'],
+            $opts['cardTextSize'],
+            $opts['cardSize']
+        );
+
+        if (empty($imgresource)) {
+            $this->session->flash_data('message', 'Virhe luodessa kuvaa');
+            redirect("uusi");
+        }
+
+        if (empty($entry)) {
+            $this->session->flash_data('message', 'Virhe tiedoissa');
+            redirect("uusi");
+        }
+
+        if ($this->ecard->get_by('hash', $entry['hash'])) {
+            redirect("ecards/" . $entry['hash']);
+        }
+
+        if (($card = $this->ecard->savecard($imgresource, $entry['hash']))) {
+
+            if ($card != $entry['hash']) {
+                log_message('debug', "card: {$card} != hash: {$entry['hash']}");
+            }
+
+            $this->ecard->insert($entry);
+
+            redirect(site_url('ecards/' . $entry['hash']));
+        }
     }
 }
 

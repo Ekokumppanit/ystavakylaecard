@@ -49,10 +49,12 @@ $route['default_controller'] = "welcome";
 $route['404_override']       = 'welcome/error404';
 
 $route['uusi']               = $route['default_controller']."/newCard";
+$route['tallenna']           = $route['default_controller']."/saveCard";
 $route['kaikki']             = $route['default_controller']."/ecards";
 $route['ecards']             = $route['default_controller']."/ecards";
 $route['ecards/(:any)']      = $route['default_controller']."/ecards/$1";
 $route['info']               = $route['default_controller']."/info";
+$route['preview/(:any)']     = $route['default_controller']."/preview/$1";
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

@@ -11,20 +11,29 @@ if (empty($amount)) {
     $amount = 5;
 }
 
-for ($i=0; $i < $amount; $i++) {
-    $url = site_url('/ecards/' . md5($i));
+        echo "\n";
+$cards = $this->ecard
+                ->order_by('created_at', 'DESC')
+                ->limit($amount)
+                ->get_many_by('card_status', 'public');
 
-    $url = '<a href="'.$url.'" title="'.$i.'">';
+foreach ($cards as $card) {
+    $url  = site_url('/ecards/' . $card->hash);
+    $img  = site_url('assets/cards/' . $card->hash . '.png');
+    $time = date("d.m.Y \k\l\o H.i", strtotime($card->created_at));
 
+    $url = '<a href="'.$url.'" title="'.$time.'">';
+
+    $img = '<img src="'.$img.'" alt="'.$time.'">';
     ?>
-            <li class="image-panel">
-                <?php echo $url; ?>
-                    <img src="http://placekitten.com/800/500" alt="placeholder+image">
-                    <em><?php echo date("d.m.Y \k\l\o H.i", rand($t_start, $t_end)); ?></em>
-                </a>
-            </li>
-
+                <li class="image-panel">
+                    <?php echo $url."\n"; ?>
+                        <?php echo $img; ?>
+                        <em><?php echo $time; ?></em>
+                    </a>
+                </li>
     <?php
+        echo "\n";
 }
 ?>
             </ul>

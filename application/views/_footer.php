@@ -1,30 +1,25 @@
 
 
-    <footer class="row">
+    <footer class="pagefooter row">
         <div class="large-12 columns">
             <div class="panel">
                 <a href="<?php echo site_url("yllapito"); ?>" class="loginlink">&pi;</a>
-                &copy; Ystäväkylä-hanke, Ekokumppanit Oy, Ismo Vuorinen 2013
+                &copy;
+                    <a target="_blank" href="http://www.ystavakyla.fi">Ystäväkylä-hanke</a>,
+                    <a target="_blank" href="http://www.ekokumppanit.fi">Ekokumppanit Oy</a>,
+                    <a target="_blank" href="http://ivuorinen.com">Ismo Vuorinen</a>
+                    2013
             </div>
         </div>
     </footer>
 
-<?php
+    <?php
     // Assets spark
     assets_js(
-        array(
-            'jquery.min.js',
-            'custom.modernizr.min.js',  // Foundation flavored Modernizr
-            'foundation.min.js',        // Foundation 1.4.1
-            'image-picker.min.js',      // Image Picker 0.1.4
-            'jquery.validate.min.js',   // jQuery Validation Plugin 1.11.1
-            'additional-methods.min.js',// jQuery Validation Methods
-            'messages_fi.js',           // jQuery Validation Plugin Finnish translation
-            'jquery-ui.min.js',         // jQuery UI 1.10.3
-            'scripts.js'                // Our scripts
-        )
+        footerAssets() // in application/helpers/ecards_helper.php
     );
 ?>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
 
 <!-- {elapsed_time} -->
 </body>

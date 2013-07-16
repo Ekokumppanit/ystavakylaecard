@@ -12,6 +12,16 @@ jQuery(document).ready(function($) {
         }
     });
 
+    // Provide zebra striping to our table
+    $('table tbody tr:odd').addClass("zebra");
+
+    // Also make parent element have class="active"
+    $('.active').parent().addClass("active");
+
+    // Add class "disabled" (text-decoration: line-through)
+    // to disabled elements parent, usually <label>
+    $("input:disabled").parent().addClass("disabled");
+
     // Change jQuery textarea hook default behavior
     $.valHooks.textarea = {
         get: function( elem ) {
@@ -52,13 +62,19 @@ jQuery(document).ready(function($) {
             scroll: false,
             stop: function(e, ui) {
 
+                // PHP imagettftext() position is set from bottom left corner
+                var height = $("#"+this.id).height();
+                var bottom = ui.position.top + height;
+
+                //alert("#" + this.id + " = b:" + bottom + " / h: " + height);
+
                 if (this.id === 'message_title_preview') {
-                    $('#placeOf_message_title_y').val(ui.position.top);
+                    $('#placeOf_message_title_y').val(bottom);
                     $('#placeOf_message_title_x').val(ui.position.left);
                 }
 
                 if (this.id === 'message_text_preview') {
-                    $('#placeOf_message_text_y').val(ui.position.top);
+                    $('#placeOf_message_text_y').val(bottom);
                     $('#placeOf_message_text_x').val(ui.position.left);
                 }
             }
@@ -130,10 +146,14 @@ jQuery(document).ready(function($) {
         var title_p = title.position();
         var text_p  = text.position();
 
+        // We count from bottom left corner
+        var title_y = title_p.top + title.height();
+        var text_y  = text_p.top  + text.height() - 30; // Manual fix
+
         // Position of elements
-        $('#placeOf_message_title_y').val(title_p.top);
+        $('#placeOf_message_title_y').val(title_y);
         $('#placeOf_message_title_x').val(title_p.left);
-        $('#placeOf_message_text_y').val(text_p.top);
+        $('#placeOf_message_text_y').val(text_y);
         $('#placeOf_message_text_x').val(text_p.left);
 
         // Size of elements

@@ -3,6 +3,7 @@
 class Yllapito extends CI_Controller
 {
     private $user;
+    public $card_count;
 
     public function __construct()
     {
@@ -11,6 +12,10 @@ class Yllapito extends CI_Controller
         $this->load->model('erkanaauth_model', 'erkana');
 
         $this->user = $this->erkana->getUser();
+
+        if (!empty($this->user)) {
+            $this->card_count = $this->ecard->countStatuses();
+        }
     }
 
     public function index()
@@ -23,6 +28,7 @@ class Yllapito extends CI_Controller
             'page_title'    => array( 'Etusivu', 'Ystäväkylä eKortti' ),
             'page_classes'  => array( 'frontpage' ),
             'user'          => $this->user,
+            'count'         => $this->card_count,
             'messages'      => $this->session->flashdata('messages')
         );
 

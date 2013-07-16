@@ -41,6 +41,14 @@ define('FOPEN_WRITE_CREATE_STRICT', 'xb');
 define('FOPEN_READ_WRITE_CREATE_STRICT', 'x+b');
 
 
+define('FONTPATH', APPPATH . 'fonts/');
+define('HEADERTEXT', FONTPATH . 'Open_Sans/OpenSans-Bold.ttf');
+define('BODYTEXT', FONTPATH . 'Open_Sans/OpenSans-Regular.ttf');
+
+define('ASSETSPATH', FCPATH . 'assets/');
+
+define('BASECARDS', ASSETSPATH . 'basecards/');
+define('CARDPATH', ASSETSPATH . 'cards/');
 
 
 /* End of file constants.php */

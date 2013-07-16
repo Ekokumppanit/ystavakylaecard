@@ -49,7 +49,7 @@ if (empty($page_title)) {
                     <li><?= lnk("kaikki", "Listaa kaikki"); ?></li>
                     <li class="divider"></li>
                     <li class="has-dropdown">
-                        <?= lnk("info", "Tietoa"); ?>
+                        <?= lnk("info", "Tietoa") . "\n"; ?>
                         <ul class="dropdown">
                             <li><?= lnk("info#rekisteri", "Rekisteriseloste"); ?></li>
                             <li><?= lnk("info#yhteystiedot", "Yhteystiedot"); ?></li>
@@ -59,61 +59,84 @@ if (empty($page_title)) {
 <?php
 if (isset($user) and ! empty($user)) {
 
+    if (empty($count)) {
+        $count->all = 0;
+        $count->queue = 0;
+        $count->private = 0;
+        $count->public = 0;
+        $count->hidden = 0;
+    }
 
     ?>
 
                 <ul class="left">
                     <li class="has-dropdown adminmenu">
                         <a href="<?php echo site_url("yllapito"); ?>">
+
+    <?php
+    if ($count->queue > 0) {
+        ?><span class="right label round"><?= $count->queue; ?></span><?php
+    } ?>
+
+                            Ylläpito (Moi <?php echo $user->firstname; ?>!)</a>
                         <ul class="dropdown">
                             <li class="has-dropdown">
-                                <?= lnk("yllapito/ecards", "Hallitse kortteja"); ?>
+                                <?= lnk("yllapito/ecards", "Hallitse kortteja") . "\n"; ?>
                                 <ul class="dropdown">
-                                    <li>
-                                        <a href="<?php echo site_url("yllapito/ecards/moderate");?>">
-                                            <span class="right label round">0</span>
-                                            Jonossa
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="<?php echo site_url("yllapito/ecards/public");?>">
-                                            <span class="right label round">0</span>
-                                            Julkaistut
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="<?php echo site_url("yllapito/ecards/private");?>">
-                                            <span class="right label round">0</span>
-                                            Privaatit
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="<?php echo site_url("yllapito/ecards/deleted");?>">
-                                            <span class="right label round">0</span>
-                                            Hylätyt
-                                        </a>
-                                    </li>
+                                    <li><?php
+                                            $text = '<span class="right label round">'
+                                                    . $count->queue
+                                                    . '</span> Jonossa';
+                                            echo lnk("yllapito/ecards/queue", $text);
+                                        ?></li>
+                                    <li><?php
+                                            $text = '<span class="right label round">'
+                                                    . $count->public
+                                                    . '</span> Julkaistut';
+                                            echo lnk("yllapito/ecards/public", $text);
+                                        ?></li>
+                                    <li><?php
+                                            $text = '<span class="right label round">'
+                                                    . $count->private
+                                                    . '</span> Privaatit';
+                                            echo lnk("yllapito/ecards/private", $text);
+                                        ?></li>
+                                    <li><?php
+                                            $text = '<span class="right label round">'
+                                                    . $count->hidden
+                                                    . '</span> Hylätyt';
+                                            echo lnk("yllapito/ecards/hidden", $text);
+                                        ?></li>
                                 </ul>
                             </li>
+                    <?php
+    // Should the user see these?
+    if ($user->can_modusers == "yes" || $user->can_seeusers == "yes") {
+                    ?>
                             <li class="has-dropdown">
-                                <a href="<?php echo site_url("yllapito/users"); ?>">Hallitse käyttäjiä</a>
+                                <?= lnk("yllapito/users", "Hallitse käyttäjiä") . "\n"; ?>
                                 <ul class="dropdown">
-                                    <li>
-                                        <a href="<?php echo site_url("yllapito/users/add");?>">
-                                            Lisää käyttäjä
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="<?php echo site_url("yllapito/users/list");?>">
-                                            Listaa käyttäjät
-                                        </a>
-                                    </li>
+                                    <?php
+        if ($user->can_modusers == "yes") {
+                                        echo "<li>"
+                                            . lnk("yllapito/users/add", "Lisää käyttäjä")
+                                            . "</li>\n";
+        }
+        if ($user->can_seeusers == "yes") {
+                                        echo "<li>"
+                                            . lnk("yllapito/users/list", "Listaa käyttäjät")
+                                            . "</li>\n";
+        }
+        ?>
                                 </ul>
                             </li>
+    <?php
+    }
+
+    ?>
                             <li class="divider"></li>
-                            <li>
-                                <a class="logout" href="<?php echo site_url("yllapito/logout"); ?>">Kirjaudu ulos</a>
-                            </li>
+                            <li><a class="logout" href="<?php
+                                echo site_url("yllapito/logout"); ?>">Kirjaudu ulos</a></li>
                         </ul>
                     </li>
                 </ul>

@@ -16,7 +16,7 @@
 <div class="row">
     <div class="large-6 small-12 columns">
         <div class="panel">
-            <form id="ecard_form">
+            <form id="ecard_form" method="post" action="<?php echo site_url('tallenna'); ?>">
 
                 <h2>Tiedot</h2>
 
@@ -124,6 +124,10 @@ if (! empty($images)) {
                 <input type="hidden" id="sizeOf_message_title_h"
                         name="sizeOf_message_title_h" value="">
 
+                <input type="hidden" id="sizeOf_image_w"
+                        name="sizeOf_image_w" value="">
+                <input type="hidden" id="sizeOf_image_h"
+                        name="sizeOf_image_h" value="">
 
                 <input type="hidden" id="placeOf_message_text_y"
                         name="placeOf_message_text_y" value="">
