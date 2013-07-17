@@ -175,7 +175,7 @@ class Yllapito extends CI_Controller
             $pass = $this->input->post('password');
 
             // Hash the password
-            $pass = $this->passwordhash($pass);
+            $pass = $this->users->passwordhash($pass);
 
             $test = array(
                 'username'      => $user,
@@ -227,16 +227,6 @@ class Yllapito extends CI_Controller
 
     public function makePassword($password = null)
     {
-        echo $this->passwordhash($password);
-    }
-
-
-
-    private function passwordhash($password = null)
-    {
-        return hash(
-            'ripemd160',
-            $password . $this->config->item('encryption_key')
-        );
+        echo $this->users->passwordhash($password);
     }
 }

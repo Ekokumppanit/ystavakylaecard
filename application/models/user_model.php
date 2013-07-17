@@ -12,6 +12,14 @@ class User_model extends MY_Model
         parent::__construct();
     }
 
+    public function passwordhash($password = null)
+    {
+        return hash(
+            'ripemd160',
+            $password . $this->config->item('encryption_key')
+        );
+    }
+
     protected function timestamps($ecard)
     {
         $ecard['created_at'] = $ecard['updated_at'] = date('Y-m-d H:i:s');
