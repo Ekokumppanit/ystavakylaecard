@@ -27,6 +27,16 @@ class User_model extends MY_Model
         return $this->update($uid, $data);
     }
 
+    public function savePassword($uid = null, $password = null)
+    {
+        if (empty($uid) || empty($password)) {
+            return false;
+        }
+
+        $password = $this->passwordhash($password);
+        return $this->update($uid, array('password' => $password));
+    }
+
     public function passwordhash($password = null)
     {
         return hash(

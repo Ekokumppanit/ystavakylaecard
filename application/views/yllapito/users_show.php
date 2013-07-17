@@ -96,6 +96,49 @@ if ($user->can_seeusers == "no") {
                     </div>
                 </form>
             </div>
+            <div class="row">
+                <form action="<?php echo $post_url."/password/".$userid; ?>" method="post"
+                    accept-charset="utf-8" id="user_password" class="custom">
+                    <input type="hidden" name="from_page" value="<?php echo current_url(); ?>">
+                    <div clas="large-12 small-12 columns">
+                        <div class="panel">
+                            <h3>Salasana</h3>
+                            <div class="row">
+                                <div class="large-6 small-12 columns">
+                                    <?php
+                                        $password = array(
+                                            'id'        => 'password',
+                                            'name'      => 'password',
+                                            'minlength' => "2",
+                                            'value'     => '',
+                                            'required'  => null
+                                        );
+                                        echo form_label('Salasana', 'password') . "\n";
+                                        echo form_password($password) . "\n";
+                                    ?>
+                                </div>
+                                <div class="large-6 small-12 columns">
+                                    <?php
+                                        $password['id'] = 'password_again';
+                                        $password['name'] = 'password_again';
+                                        echo form_label('Salasana uudelleen', 'password_again') . "\n";
+                                        echo form_password($password) . "\n";
+                                    ?>
+                                </div>
+                            </div>
+                            <?php
+    echo form_submit(
+        array(
+            'name' => 'savepassword',
+            'value' => 'Tallenna uusi salasana',
+            'class' => 'button small large-12 small-12'
+        )
+    );
+                            ?>
+                        </div>
+                    </div>
+                </form>
+            </div>
 
     <?php
 }

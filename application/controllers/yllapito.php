@@ -152,6 +152,12 @@ class Yllapito extends CI_Controller
                 $this->users->save($user_id, $data);
                 redirect($from);
                 break;
+            case 'password':
+                $data = $this->input->post();
+                $from = $data['from_page'];
+                $this->users->savePassword($user_id, $data['password']);
+                redirect($from);
+                break;
             case 'show':
                 $data['userid'] = $user_id;
                 $data['userdata'] = $this->users->get($user_id);

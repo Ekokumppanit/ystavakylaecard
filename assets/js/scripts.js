@@ -12,6 +12,14 @@ jQuery(document).ready(function($) {
         }
     });
 
+    // Trigger jQuery validation of user password form
+    $('#user_password').validate({
+          rules: {
+            password: "required",
+            password_again: {
+                equalTo: "#password"
+            }
+        },
         submitHandler: function(form) {
             form.submit();
         }
