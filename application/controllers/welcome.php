@@ -30,6 +30,20 @@ class Welcome extends CI_Controller
         $this->load->view('_footer', $data);
     }
 
+    public function error404()
+    {
+        $data = array(
+            'page_title'    => array( 'Virhe 404: Sivua ei löydetty', 'Ystäväkylä eKortti' ),
+            'page_classes'  => array( 'error404' ),
+            'count'         => $this->card_count,
+            'user'          => $this->user
+        );
+
+        $this->load->view('_header', $data);
+        $this->load->view('error404', $data);
+        $this->load->view('_footer', $data);
+    }
+
     public function info()
     {
         $data = array(
