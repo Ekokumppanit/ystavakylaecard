@@ -92,9 +92,9 @@ if (!empty($cards)) {
 
         $checkboxes = array(
             'queue' => 'Jonossa',
-            'public' => 'Julkaise',
-            'private' => 'Piilota',
-            'hidden' => 'Hylkää'
+            'public' => 'Julkaistu',
+            'private' => 'Piilotettu',
+            'hidden' => 'Hylätty'
         );
 
 

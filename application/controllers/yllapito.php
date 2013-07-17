@@ -113,7 +113,9 @@ class Yllapito extends CI_Controller
         if (empty($limit)) {
             $data['cards'] = $this->ecard->order_by('created_at')->get_all();
         } else {
-            $data['cards'] = $this->ecard->order_by('created_at')->get_many_by('card_status', $limit);
+            $data['cards'] = $this->ecard
+                                        ->order_by('created_at')
+                                        ->get_many_by('card_status', $limit);
         }
 
         $data['page_title'] = array_merge($page_title, $data['page_title']);
@@ -155,7 +157,6 @@ class Yllapito extends CI_Controller
                 $page_title = array("Listaa kaikki", "Käyttäjät");
                 break;
         }
-
 
         $data['page_title'] = array_merge($page_title, $data['page_title']);
         $page = 'yllapito/users_'.$section;

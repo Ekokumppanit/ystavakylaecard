@@ -118,14 +118,14 @@ if (isset($user) and ! empty($user)) {
                                 <ul class="dropdown">
                                     <?php
         if ($user->can_modusers == "yes") {
-                                        echo "<li>"
-                                            . lnk("yllapito/users/add", "Lisää käyttäjä")
-                                            . "</li>\n";
+            echo "<li>"
+                . lnk("yllapito/users/add", "Lisää käyttäjä")
+                . "</li>\n";
         }
         if ($user->can_seeusers == "yes") {
-                                        echo "<li>"
-                                            . lnk("yllapito/users/list", "Listaa käyttäjät")
-                                            . "</li>\n";
+            echo "<li>"
+                . lnk("yllapito/users", "Listaa käyttäjät")
+                . "</li>\n";
         }
         ?>
                                 </ul>

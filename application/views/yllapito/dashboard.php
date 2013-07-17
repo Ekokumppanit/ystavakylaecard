@@ -21,7 +21,7 @@ if ($all > 0) {
 if ($p_queue > 0) { ?>
         <span   data-tooltip
                 class="has-tip left queue meter"
-                data-width="210"
+                data-width="230"
                 title="Kortteja jonossa <?=$count->queue; ?> kpl"
                 style="width: <?=$p_queue;?>%"></span>
     <?php
@@ -29,7 +29,7 @@ if ($p_queue > 0) { ?>
 if ($p_public > 0) { ?>
         <span   data-tooltip
                 class="has-tip left public meter"
-                data-width="210"
+                data-width="230"
                 title="Kortteja julkaistuna <?=$count->public; ?> kpl"
                 style="width: <?=$p_public;?>%"></span>
     <?php
@@ -37,15 +37,15 @@ if ($p_public > 0) { ?>
 if ($p_private > 0) { ?>
         <span   data-tooltip
                 class="has-tip left private meter"
-                data-width="210"
-                title="Kortteja piilotettuna <?=$count->private; ?> kpl"
+                data-width="230"
+                title="Yksityisiä kortteja <?=$count->private; ?> kpl"
                 style="width: <?=$p_private;?>%"></span>
     <?php
 }
 if ($p_hidden > 0) { ?>
         <span   data-tooltip
                 class="has-tip left hidden meter"
-                data-width="210"
+                data-width="230"
                 title="Poistettuja kortteja <?=$count->hidden; ?> kpl"
                 style="width: <?=$p_hidden;?>%"></span>
     <?php
@@ -54,15 +54,15 @@ if ($p_hidden > 0) { ?>
 
             </div>
 
-            <pre><?php
+            <h4>Kortit</h4>
 
-if (empty($user)) {
-    $user = new stdClass();
-}
-
-var_export($user);
-
-?></pre>
+            <ul class="inline-list">
+                <li><?php echo lnk("yllapito/ecards/queue", "Jonossa"); ?></li>
+                <li><?php echo lnk("yllapito/ecards/public", "Julkaistut"); ?></li>
+                <li><?php echo lnk("yllapito/ecards/private", "Yksityiset"); ?></li>
+                <li><?php echo lnk("yllapito/ecards/hidden", "Piilotetut"); ?></li>
+                <li><?php echo lnk("yllapito/ecards/", "Kaikki"); ?></li>
+            </ul>
 
         </div>
     </div>

@@ -133,7 +133,7 @@ table thead th button {
     font-size: 11px;
 }
 
-#ecard_form label.error {
+form label.error {
     margin-top: -10px;
     padding-bottom: 20px;
     clear: both;

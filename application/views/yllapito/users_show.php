@@ -3,7 +3,12 @@
 if (empty($userdata)) {
     $userdata = array();
 }
-
+if (empty($user)) {
+    $user = new stdClass();
+}
+if (empty($userid)) {
+    $userid = 0;
+}
 ?>
 
 <div class="row">
