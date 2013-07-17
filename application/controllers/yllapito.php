@@ -125,7 +125,7 @@ class Yllapito extends CI_Controller
         $this->load->view('_footer', $data);
     }
 
-    public function users($section = 'listall', $user_id = null, $action = null)
+    public function users($action = 'listall', $user_id = null)
     {
         if (empty($this->user)) {
             redirect("/yllapito/kirjaudu");
@@ -140,12 +140,10 @@ class Yllapito extends CI_Controller
         );
         $page_title = array();
 
-        switch ($section) {
-            case 'modify':
-                if ($action == "delete" && is_numeric($user_id)) {
-                    $this->user->delete($user_id);
-                }
-                redirect("yllapito/users");
+        switch ($action) {
+            case 'delete':
+                $this->user->delete($user_id);
+                redirect('yllapito/users');
                 break;
             case 'show':
                 $data['userid'] = $user_id;
@@ -159,7 +157,7 @@ class Yllapito extends CI_Controller
         }
 
         $data['page_title'] = array_merge($page_title, $data['page_title']);
-        $page = 'yllapito/users_'.$section;
+        $page = 'yllapito/users_'.$action;
 
         $this->load->view('_header', $data);
         $this->load->view($page, $data);
