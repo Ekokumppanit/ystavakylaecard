@@ -6,7 +6,12 @@ jQuery(document).ready(function($) {
     $(document).foundation();
 
     // Trigger jQuery validation of ecard creation form
-    $('#ecard_form').validate({
+    $('#ecard_form, #user_data').validate({
+        submitHandler: function(form) {
+            form.submit();
+        }
+    });
+
         submitHandler: function(form) {
             form.submit();
         }

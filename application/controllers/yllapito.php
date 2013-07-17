@@ -13,6 +13,7 @@ class Yllapito extends CI_Controller
         $this->load->model('erkanaauth_model', 'erkana');
 
         $this->load->helper('date');
+        $this->load->helper('form');
 
         $this->user = $this->erkana->getUser();
 
@@ -144,6 +145,12 @@ class Yllapito extends CI_Controller
             case 'delete':
                 $this->user->delete($user_id);
                 redirect('yllapito/users');
+                break;
+            case 'save':
+                $data = $this->input->post();
+                $from = $data['from_page'];
+                $this->users->save($user_id, $data);
+                redirect($from);
                 break;
             case 'show':
                 $data['userid'] = $user_id;
