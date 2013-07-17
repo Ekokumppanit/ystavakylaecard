@@ -25,9 +25,17 @@ if (! empty($message)) { ?>
     <dd><?= lnk("yllapito/ecards/hidden", "Hylätyt {$count->hidden}"); ?></dd>
 </dl>
 
+<?php
+if ($user->can_approve == "yes") {
+    ?>
             <form action="<?php echo site_url("yllapito/ecards/save");?>" method="post" accept-charset="utf-8">
                 <input type="hidden" name="from_page" value="<?php echo current_url();?>">
                 <input type="hidden" name="page" value="<?php echo current_url();?>">
+
+    <?php
+} else {
+}
+?>
                 <table id="cardlist" class="valign">
                     <thead>
                         <tr>
@@ -42,7 +50,7 @@ if (! empty($message)) { ?>
 
 <?php
 
-if (!empty($cards)) {
+if (! empty($cards) && isset($cards)) {
     foreach ($cards as $card) {
         $i = $card->id;
 
@@ -97,33 +105,36 @@ if (!empty($cards)) {
             'hidden' => 'Hylätty'
         );
 
+        if ($user->can_approve == "yes") {
+            foreach ($checkboxes as $value => $label) {
 
-        foreach ($checkboxes as $value => $label) {
+                $private = false;
 
-            $private = false;
+                // Can't make private cards public
+                if ($value == "public") {
+                    $private = ($card->private == "yes") ? true : false;
+                }
 
-            // Can't make private cards public
-            if ($value == "public") {
-                $private = ($card->private == "yes") ? true : false;
+                echo str_repeat(" ", 28)
+                    . checkboxed(
+                        'card_status',
+                        $card->card_status,
+                        $value,
+                        $label,
+                        $card->id,
+                        $private
+                    ). "\n";
             }
-
-            echo str_repeat(" ", 28)
-                . checkboxed(
-                    'card_status',
-                    $card->card_status,
-                    $value,
-                    $label,
-                    $card->id,
-                    $private
-                ). "\n";
+        } else {
+            echo $checkboxes[$card->card_status];
         }
+    }
 
         ?>
 
                         </td>
                     </tr>
         <?php
-    }
 }
 
 ?>
@@ -132,8 +143,16 @@ if (!empty($cards)) {
                     </tbody>
                 </table>
 
+<?php
+if ($user->can_approve == "yes") {
+    ?>
                 <input type="submit" name="" class="button success" value="Tallenna muutokset">
             </form>
+
+    <?php
+} else {
+}
+?>
         </div>
     </div>
 </div>
