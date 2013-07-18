@@ -151,7 +151,7 @@ class Yllapito extends CI_Controller
                 redirect('yllapito/users/'.$redir);
                 break;
             case 'delete':
-                $this->user->delete($user_id);
+                $this->users->delete($user_id);
                 redirect('yllapito/users');
                 break;
             case 'save':

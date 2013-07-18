@@ -1,4 +1,3 @@
-
 <?php
 if (empty($userdata)) {
     $userdata = array();
@@ -16,10 +15,10 @@ if (empty($userid)) {
         <div class="panel">
 
 <?php
-if ($user->can_seeusers == "no") {
+if ($user->can_modusers == "no") {
     ?>
             <div data-alert class="alert-box error">
-                Sinulla ei ole oikeutta käyttäjien listaamiseen.
+                Sinulla ei ole oikeutta käyttäjien muokkaamiseen.
             </div>
             <?php echo lnk("yllapito/users", "Takaisin"); ?>
     <?php
@@ -139,7 +138,28 @@ if ($user->can_seeusers == "no") {
                     </div>
                 </form>
             </div>
-
+            <div class="row">
+                <div clas="large-12 small-12 columns">
+                    <div class="panel">
+                        <h3>Poista käyttäjä</h3>
+                        <div class="row">
+                            <div class="large-12 small-12 columns">
+                                <?php
+    if ($user->id == $userid) { ?>
+                                <strong>Et voi poistaa itseäsi, hassu.</strong>
+                                <?php
+    } else {
+                                ?>
+                                <a class="deleteuser button medium alert large-12 small-12"
+                                    href="<?php echo $post_url."/delete/".$userid; ?>">Poista käyttäjä</a>
+                                <?php
+    }
+                                ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
     <?php
 }
 ?>

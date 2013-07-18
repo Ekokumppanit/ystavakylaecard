@@ -38,6 +38,10 @@ jQuery(document).ready(function($) {
         }
     });
 
+    $('.deleteuser').on('click', function () {
+        return confirm('Oletko varma?');
+    });
+
     // Provide zebra striping to our table
     $('table tbody tr:odd').addClass("zebra");
 
