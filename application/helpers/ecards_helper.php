@@ -3,16 +3,17 @@
 /**
  * lnk helps return anchor tag with class when current_url() is site_url($match)
  *
- * @param  string $url   Your link inside the application, not for outside links
- * @param  string $text  Link text
- * @param  string $match What url to match against, use like $url
- * @param  string $class What class should be added if urls match
+ * @param  string $url        Your link inside the application, not for outside links
+ * @param  string $text       Link text
+ * @param  string $baseclass  What classes should be included
+ * @param  string $match      What url to match against, use like $url
+ * @param  string $class      What class should be added if urls match
  *
  * @author Ismo Vuorinen <ismo.vuorinen@tampere.fi>
  *
  * @return string        Formatted anchor tag with everything needed
  */
-function lnk($url = null, $text = null, $match = null, $class = ' active')
+function lnk($url = null, $text = null, $baseclass = '', $match = null, $class = ' active')
 {
     // $url should be "controller/action", no need to give full url
     $url = site_url($url);
@@ -26,9 +27,12 @@ function lnk($url = null, $text = null, $match = null, $class = ' active')
 
     // Return correctly formatted link
     if ($url == $match) {
-        return '<a class="' . $class . '" href="' . $url . '">' . $text . '</a>';
+        return '<a class="' . $baseclass . $class . '" href="' . $url . '">' . $text . '</a>';
     } else {
-        return '<a href="'. $url .'">' . $text . '</a>';
+        if (! empty($baseclass)) {
+            $baseclass = 'class="' . $baseclass . '" ';
+        }
+        return '<a ' . $baseclass . 'href="'. $url .'">' . $text . '</a>';
     }
 }
 

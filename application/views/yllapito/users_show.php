@@ -25,7 +25,7 @@ if ($user->can_modusers == "no") {
 } elseif (empty($userdata) || ! is_object($userdata)) {
     ?>
             <h2>Käyttäjää tunnisteella #<?php echo $userid; ?> ei löydetty</h2>
-            <?php echo lnk("yllapito/users", "Takaisin"); ?>
+            <?php echo lnk("yllapito/users", "Takaisin", 'button medium'); ?>
     <?php
 } else {
 
