@@ -142,6 +142,14 @@ class Yllapito extends CI_Controller
         $page_title = array();
 
         switch ($action) {
+            case 'add':
+                $page_title = array('Lisää uusi käyttäjä', 'Käyttäjät');
+                break;
+            case 'create':
+                $new_id = $this->users->add($this->input->post());
+                $redir = (! $new_id) ? '' : 'show/'.$new_id;
+                redirect('yllapito/users/'.$redir);
+                break;
             case 'delete':
                 $this->user->delete($user_id);
                 redirect('yllapito/users');

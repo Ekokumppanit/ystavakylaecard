@@ -11,12 +11,18 @@ if (empty($user)) {
     $user = new stdClass();
 }
 
-if ($user->can_seeusers == 'no') { ?>
+if ($user->can_seeusers == 'no' && isset($user->can_seeusers)) { ?>
             <div data-alert class="alert-box error">
                 Sinulla ei ole oikeutta käyttäjien listaamiseen.
             </div>
     <?php
-} else { ?>
+} else {
+    if ($user->can_modusers == 'yes') {
+        echo lnk("yllapito/users/add", "Lisää uusi käyttäjä");
+    }
+    ?>
+
+
 
             <table>
                 <thead>

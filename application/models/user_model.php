@@ -12,6 +12,22 @@ class User_model extends MY_Model
         parent::__construct();
     }
 
+    public function add($data)
+    {
+        if (empty($data)) {
+            return false;
+        }
+
+        unset(
+            $data['password_again'],
+            $data['savedata'],
+            $data['submit']
+        );
+        $data['password'] = $this->passwordhash($data['password']);
+
+        return $this->insert($data);
+    }
+
     public function save($uid = null, $data = null)
     {
         if (empty($uid) || empty($data)) {

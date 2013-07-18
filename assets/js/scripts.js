@@ -25,6 +25,19 @@ jQuery(document).ready(function($) {
         }
     });
 
+    $('#user_add').validate({
+          rules: {
+            username: "email",
+            password: "required",
+            password_again: {
+                equalTo: "#password"
+            }
+        },
+        submitHandler: function(form) {
+            form.submit();
+        }
+    });
+
     // Provide zebra striping to our table
     $('table tbody tr:odd').addClass("zebra");
 
