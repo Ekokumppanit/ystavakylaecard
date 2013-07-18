@@ -52,6 +52,25 @@ if ($user->can_seeusers == 'no' && isset($user->can_seeusers)) { ?>
             $seeusr = ($usr->can_seeusers == "yes") ? img($ok, true) : img($no, true);
             $modusr = ($usr->can_modusers == "yes") ? img($ok, true) : img($no, true);
 
+            // Our last login and how show it
+            $ll_mysql = strtotime($usr->last_login);
+            $lastlogin = (empty($usr->last_login)) ? null : timespan($ll_mysql, $now);
+
+            if (empty($lastlogin)) {
+                $lastlogin = "&mdash;";
+            } else {
+                $lastlogin = $usr->last_login
+                            . "<br><small>"
+                            . $lastlogin
+                            . "</small>";
+            }
+
+            $created_at = strtotime($usr->created_at);
+            $created    = $usr->created_at
+                        . "<br><small>"
+                        . timespan(strtotime($usr->created_at), $now)
+                        . "</small>";
+
             $name   = $usr->firstname. " ". $usr->lastname;
 
             ?>
@@ -60,15 +79,8 @@ if ($user->can_seeusers == 'no' && isset($user->can_seeusers)) { ?>
                         <td><?php echo lnk("yllapito/users/show/". $usr->id, $name); ?><br>
                             <small><?php echo $usr->username; ?></small>
                         </td>
-                        <td><?php
-                                echo $usr->created_at; ?><br><small><?php
-                                echo timespan(strtotime($usr->created_at), $now);
-                            ?></small></td>
-                        <td><?php
-                                echo $usr->last_login;
-                                ?><br><small><?php
-                                echo timespan(strtotime($usr->last_login), $now);
-                            ?></small></td>
+                        <td><?php echo $created; ?></td>
+                        <td><?php echo $lastlogin; ?></td>
                         <td><?php echo $queue; ?></td>
                         <td><?php echo $seeusr; ?></td>
                         <td><?php echo $modusr; ?></td>
