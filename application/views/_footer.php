@@ -7,7 +7,7 @@
                 &copy;
                     <a target="_blank" href="http://www.ystavakyla.fi">Ystäväkylä-hanke</a>,
                     <a target="_blank" href="http://www.ekokumppanit.fi">Ekokumppanit Oy</a>,
-                    <a target="_blank" href="http://ivuorinen.com">Ismo Vuorinen</a>
+                    <a target="_blank" href="http://ivuorinen.net">Ismo Vuorinen</a>
                     2013
             </div>
         </div>
