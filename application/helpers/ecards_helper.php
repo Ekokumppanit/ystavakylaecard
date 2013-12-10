@@ -435,3 +435,43 @@ function parseCardEntryValues($post)
 
     return $values;
 }
+
+/**
+ * debug
+ * handy little debugging commaind
+ *
+ * @param mixed   $thing What you want to see
+ * @param boolean $show  Should it be visible on page or only on source code
+ *
+ * @author  Ismo Vuorinen <ismo.vuorinen@rotor.fi>
+ * @package Default
+ *
+ * @return  true Script prints debugged thing, returns true always.
+ */
+function debug($thing = null, $show = false)
+{
+    if (ENVIRONMENT != "development") {
+        return false;
+    }
+
+    // What triggered this?
+    $caller = array_shift(debug_backtrace());
+    $from   = str_replace(dirname(BASEPATH), '', $caller['file'])
+            . '#' . $caller['line'];
+    unset($caller);
+
+    if ($show) {
+        $start = "\n<pre>";
+        $end   = "\n</pre>\n";
+    } else {
+        $start = "\n<!--\n";
+        $end   = "\n-->\n";
+    }
+
+    $debug = $start . $from . "\n" . print_r($thing, true) . $end;
+
+    echo $debug;
+
+    return true;
+}
+
