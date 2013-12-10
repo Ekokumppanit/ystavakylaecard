@@ -233,6 +233,16 @@ class Welcome extends CI_Controller
             redirect(site_url('ecards/' . $entry['hash']));
         }
     }
+
+    public function mail($card_id = null)
+    {
+        $data = $this->ecard->get_by('hash', $card_id);
+
+        $data->websiteurl = site_url('ecards/' . $card_id);
+        $data->imageurl   = site_url('assets/cards/' . $card_id . '.png');
+
+        $this->load->view('email_template', $data);
+    }
 }
 
 /* End of file welcome.php */
