@@ -64,13 +64,13 @@ class Ecard_model extends MY_Model
             $cardPath = FCPATH . 'assets/basecards/1.jpg';
         }
 
-        // Header text place, 5x5 from top left corner
+        // Header text place, 5x35 from top left corner
         if (empty($cardHeadPlace)) {
             $cardHeadPlace["x"] = 5;
             $cardHeadPlace["y"] = 35;
         }
 
-        // Text place defaults, x 30 px lower than header text
+        // Text place defaults, 30 px lower than header text
         if (empty($cardTextPlace)) {
             $cardTextPlace["x"] = 5;
             $cardTextPlace["y"] = 65;
@@ -133,6 +133,13 @@ class Ecard_model extends MY_Model
         return $rImg;
     }
 
+    /**
+     * showCard displays image resource
+     *
+     * @param resource $rImg Image resource from memory
+     *
+     * @return image         PNG File
+     */
     public function showCard($rImg = null)
     {
         if (empty($rImg) || ! is_resource($rImg)) {
@@ -189,9 +196,9 @@ class Ecard_model extends MY_Model
 
         // Count amounts
         $result = $this->db->select("COUNT(*) num, card_status")
-                ->group_by("card_status")
-                ->get($this->_table)
-                ->result_object();
+            ->group_by("card_status")
+            ->get($this->_table)
+            ->result_object();
 
         // Make easier to use
         if (!empty($result)) {
