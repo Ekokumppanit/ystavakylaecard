@@ -44,15 +44,15 @@ if (empty($page_title)) {
             <section class="top-bar-section">
                 <ul class="left">
                     <li class="divider"></li>
-                    <li><?= lnk("uusi", "Luo omasi!"); ?></li>
+                    <li><?php echo lnk("uusi", "Luo omasi!"); ?></li>
                     <li class="divider"></li>
-                    <li><?= lnk("kaikki", "Listaa kaikki"); ?></li>
+                    <li><?php echo lnk("kaikki", "Listaa kaikki"); ?></li>
                     <li class="divider"></li>
                     <li class="has-dropdown">
-                        <?= lnk("info", "Tietoa") . "\n"; ?>
+                        <?php echo lnk("info", "Tietoa") . "\n"; ?>
                         <ul class="dropdown">
-                            <li><?= lnk("info#rekisteri", "Rekisteriseloste"); ?></li>
-                            <li><?= lnk("info#yhteystiedot", "Yhteystiedot"); ?></li>
+                            <li><?php echo lnk("info#rekisteri", "Rekisteriseloste"); ?></li>
+                            <li><?php echo lnk("info#yhteystiedot", "Yhteystiedot"); ?></li>
                         </ul>
                     </li>
                 </ul>
@@ -75,13 +75,13 @@ if (isset($user) and ! empty($user)) {
 
     <?php
     if ($count->queue > 0) {
-        ?><span class="right label round"><?= $count->queue; ?></span><?php
+        ?><span class="right label round"><?php echo $count->queue; ?></span><?php
     } ?>
 
                             Ylläpito (Moi <?php echo $user->firstname; ?>!)</a>
                         <ul class="dropdown">
                             <li class="has-dropdown">
-                                <?= lnk("yllapito/ecards", "Hallitse kortteja") . "\n"; ?>
+                                <?php echo lnk("yllapito/ecards", "Hallitse kortteja") . "\n"; ?>
                                 <ul class="dropdown">
                                     <li><?php
                                             $text = '<span class="right label round">'
@@ -114,7 +114,7 @@ if (isset($user) and ! empty($user)) {
     if ($user->can_modusers == "yes" || $user->can_seeusers == "yes") {
                     ?>
                             <li class="has-dropdown">
-                                <?= lnk("yllapito/users", "Hallitse käyttäjiä") . "\n"; ?>
+                                <?php echo lnk("yllapito/users", "Hallitse käyttäjiä") . "\n"; ?>
                                 <ul class="dropdown">
                                     <?php
         if ($user->can_modusers == "yes") {

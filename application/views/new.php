@@ -173,9 +173,6 @@ if (! empty($images)) {
 
             </form>
 
-
-
-
         </div>
     </div>
 
