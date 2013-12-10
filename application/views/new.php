@@ -78,12 +78,14 @@
 <?php
 if (! empty($images)) {
     foreach ($images as $i => $image) {
-        $name = pathinfo($image, PATHINFO_FILENAME);
 
-        ?>                            <option data-img-src='<?php echo $image;
+        $url  = $image->card_url;
+        $name = $image->card_alt . ' (#' . $i . ')';
+
+        ?>                            <option data-img-src='<?php echo $url;
                             ?>' value='<?php
-                                echo $image;
-                            ?>'>Kuva: <?=$name;?></option><?php
+                                echo $url;
+                            ?>'>Kuva: <?php echo $name; ?></option><?php
             echo "\n";
     }
 }

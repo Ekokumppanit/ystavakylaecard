@@ -48,3 +48,17 @@ CREATE TABLE IF NOT EXISTS `ystavakyla_ecards__users` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `ystavakyla_ecards__templates` (
+  `id` int(22) NOT NULL AUTO_INCREMENT,
+  `card_filename` varchar(255) DEFAULT NULL COMMENT 'cardname.jpg',
+  `card_author` varchar(255) DEFAULT NULL COMMENT 'Copyright notice',
+  `card_alt` varchar(255) DEFAULT NULL COMMENT 'Alternative for img tag',
+  `card_status` tinyint(1) NOT NULL DEFAULT '1' COMMENT 'Is the card active',
+  `created_by` int(55) DEFAULT NULL COMMENT 'User id who uploaded',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `card_filename` (`card_filename`),
+  KEY `card_status` (`card_status`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;

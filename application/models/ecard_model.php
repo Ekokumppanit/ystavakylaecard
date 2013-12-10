@@ -184,6 +184,49 @@ class Ecard_model extends MY_Model
     }
 
     /**
+     * getCardTemplates fetches templates from database
+     *
+     * @param bool    $status Card templates based on status
+     * @param integer $limit  How many should we fetch
+     * @param integer $offset Offset for limit
+     *
+     * @return object         Cards sorted by database ID
+     */
+    public function getCardsTemplates($status = 1, $limit = 25, $offset = 0)
+    {
+        $return = new stdClass();
+
+        // Get templates from database
+        $result = $this->db->get_where(
+            'templates',
+            array(
+                'card_status' => $status
+            ),
+            $limit,
+            $offset
+        )
+            ->result_object();
+
+        // Make easier to use, remove non existing
+        if (!empty($result)) {
+            foreach ($result as $image) {
+
+                $image->card_path = APPPATH . '../assets/basecards/' . $image->card_filename;
+
+                if (! is_readable($image->card_path)) {
+                    continue;
+                }
+
+                $image->card_url = site_url('assets/basecards/' . $image->card_filename);
+                $return->{$image->id} = $image;
+            }
+        }
+
+        // Return our defaults, or our counts
+        return $return;
+    }
+
+    /**
      * countStatuses
      * Get numbers for card statuses
      *

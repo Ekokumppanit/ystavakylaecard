@@ -65,7 +65,7 @@ class Welcome extends CI_Controller
             'page_title'    => array( 'Uusi eKortti', 'Ystäväkylä eKortti' ),
             'page_classes'  => array( 'new_card' ),
             'count'         => $this->card_count,
-            'images'        => fetchBaseCards(),
+            'images'        => $this->ecard->getCardsTemplates(1),
             'user'          => $this->user
         );
 
