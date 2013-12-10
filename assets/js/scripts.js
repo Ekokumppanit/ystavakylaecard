@@ -1,6 +1,8 @@
 /* jslint node: true */
 jQuery(document).ready(function($) {
-   "use strict";
+    "use strict";
+
+    $("html").removeClass('no-js').addClass('js');
 
     // Our Foundation trigger
     $(document).foundation();

@@ -177,17 +177,50 @@ if (! empty($images)) {
     </div>
 
     <div class="large-6 small-12 columns">
-        <div class="panel previewpanelclear">
+        <div class="panel previewpanelclear requires-js">
             <h2>Esikatselu</h2>
             <div id="previewpanel">
                 <div id="message_title_preview">Moikka!</div>
                 <div id="message_text_preview">Terveisiä täältä internetistä!</div>
                 <img id="previewimage" src="http://dummyimage.com/800x600/4d494d/686a82.gif&text=placeholder+image">
             </div>
+            <p>Voit raahata tässä tekstejä parempiin kohtiin.</p>
+        </div>
+        <div class="panel noscript">
+            <p>
+                Jos selaimessanne olisi JavaScript-tuki päällä,
+                tässä näkyisi hieno esikatselu kortistanne
+                kirjoittamanne tekstin kera.
+                <a target="_blank" href="http://www.enable-javascript.com/">Ohjeet tuen päällepistämiseen</a>.
+            </p>
+            <table>
+<?php
+if (! empty($images)) {
+    foreach ($images as $i => $image) {
+
+        $url  = $image->card_url;
+        $name = $image->card_alt . ' (#' . $i . ')';
+
+        ?>
+                <tr>
+                    <td width="120" class="thumb"><img src="<?php echo $url; ?>" alt="<?php echo $name; ?>"></td>
+                    <td class="details">
+                        Kuva: <strong><?php echo $name; ?></strong><br>
+                        Tekijä: <strong><?php echo $image->card_author; ?></strong><br>
+                    </td>
+                </tr>
+                <?php
+            echo "\n";
+    }
+}
+?>
+            </table>
         </div>
 
-<?php if (ENVIRONMENT == "development"): ?>
-        <div class="panel toteutuva">
+<?php
+if (ENVIRONMENT == "development") {
+    ?>
+        <div class="panel toteutuva requires-js">
             <a href="javascript:return false;" class="updatepreview">
                 <img src="http://dummyimage.com/800x600/4d494d/686a82.gif&text=toteutuva" width="800" height="600">
             </a>
@@ -195,8 +228,8 @@ if (! empty($images)) {
         </div>
 
 
-<?php
-endif;
+    <?php
+}
 ?>
         <div class="panel">
             <p>Tiedot kerätään vain postikorttien lähettämiseen ja halutessasi arvontaan osallistumista varten.</p>

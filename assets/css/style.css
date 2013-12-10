@@ -12,6 +12,24 @@ body {
     font-weight: 300;
 }
 
+html.no-js .requires-js,
+html.js .noscript {
+    display: none;
+}
+
+html.no-js .noscript {
+    display: block;
+}
+
+.alert {
+    text-align: center;
+}
+
+.alert a {
+    color: #fff;
+    border-bottom: 1px dashed #fff;
+}
+
 body footer {
     padding-top: 30px;
 }
