@@ -2,7 +2,7 @@
 
 class Welcome extends CI_Controller
 {
-    private $user;
+    private $_user;
     public $card_count;
 
     public function __construct()
@@ -11,7 +11,7 @@ class Welcome extends CI_Controller
         $this->load->model('ecard_model', 'ecard');
         $this->load->model('erkanaauth_model', 'erkana');
 
-        $this->user = $this->erkana->getUser();
+        $this->_user = $this->erkana->getUser();
         $this->card_count = $this->ecard->countStatuses();
     }
 
@@ -22,7 +22,7 @@ class Welcome extends CI_Controller
             'page_title'    => array( 'Etusivu', 'Ystäväkylä eKortti' ),
             'page_classes'  => array( 'frontpage' ),
             'count'         => $this->card_count,
-            'user'          => $this->user
+            'user'          => $this->_user
         );
 
         $this->load->view('_header', $data);
@@ -36,7 +36,7 @@ class Welcome extends CI_Controller
             'page_title'    => array( 'Virhe 404: Sivua ei löydetty', 'Ystäväkylä eKortti' ),
             'page_classes'  => array( 'error404' ),
             'count'         => $this->card_count,
-            'user'          => $this->user
+            'user'          => $this->_user
         );
 
         $this->load->view('_header', $data);
@@ -50,7 +50,7 @@ class Welcome extends CI_Controller
             'page_title'    => array( 'Tietoa', 'Ystäväkylä eKortti' ),
             'page_classes'  => array( 'info' ),
             'count'         => $this->card_count,
-            'user'          => $this->user
+            'user'          => $this->_user
         );
 
         $this->load->view('_header', $data);
@@ -66,7 +66,7 @@ class Welcome extends CI_Controller
             'page_classes'  => array( 'new_card' ),
             'count'         => $this->card_count,
             'images'        => $this->ecard->getCardsTemplates(1),
-            'user'          => $this->user
+            'user'          => $this->_user
         );
 
         $this->load->view('_header', $data);
@@ -79,7 +79,7 @@ class Welcome extends CI_Controller
         $data = array(
             'page_classes'  => array( 'ecards' ),
             'count'         => $this->card_count,
-            'user'          => $this->user
+            'user'          => $this->_user
         );
 
         if (empty($card_id)) {
