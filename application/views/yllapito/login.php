@@ -36,7 +36,7 @@ if (! empty($error)) { ?>
                                     id="username"
                                     name="username"
                                     class="expand"
-                                    value="ismo.vuorinen@tampere.fi"
+                                    value=""
                                 >
                             </div>
                         </div>
@@ -53,7 +53,7 @@ if (! empty($error)) { ?>
                                     name="password"
                                     placeholder=""
                                     class="expand"
-                                    value="aasi"
+                                    value=""
                                 >
                             </div>
                         </div>
