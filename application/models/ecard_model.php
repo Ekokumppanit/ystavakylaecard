@@ -183,6 +183,12 @@ class Ecard_model extends MY_Model
         return true;
     }
 
+    /**
+     * countStatuses
+     * Get numbers for card statuses
+     *
+     * @return object Contains numbers for all, queued, private, public and hidden
+     */
     public function countStatuses()
     {
         $return = new stdClass();
