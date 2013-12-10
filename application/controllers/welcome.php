@@ -196,6 +196,40 @@ class Welcome extends CI_Controller
 
             $this->ecard->insert($entry);
 
+            if (($apikey = $this->config->item('mandrill_apikey'))) {
+
+                define('MAILCHIMP_API_KEY', $apikey);
+
+                $this->load->library('Maildeliverysystem');
+
+                $email_receivers = array(
+                    array(
+                        'name'  => $entry['receiver_name'],
+                        'email' => $entry['receiver_email']
+                    )
+                );
+
+                $email_sender_name  = $entry['uploader_name'];
+                $email_sender_email = $entry['uploader_email'];
+
+                $entry['websiteurl'] = site_url('ecards/' . $entry['hash']);
+                $entry['imageurl']   = site_url('assets/cards/' . $entry['hash'] . '.png');
+
+                $email_content = $this->load->view('email_template', $entry, true);
+
+                // Send order confirmation
+                $this->maildeliverysystem->sendmail(
+                    $email_receivers,
+                    $email_content,
+                    "Ystäväkylän sähköpostikortti",
+                    $email_sender_name,
+                    $email_sender_email,
+                    array(
+                        'reply-to' => $email_sender_email
+                    )
+                );
+            }
+
             redirect(site_url('ecards/' . $entry['hash']));
         }
     }

@@ -200,7 +200,7 @@ class MailDeliverySystem
      */
     public function buildMessage()
     {
-        $tracking_domain = getEmailDomain($this->sender_email);
+        $tracking_domain = "ystavakyla.fi";
 
         $message  = array(
             'html'                => $this->content, // ci view
