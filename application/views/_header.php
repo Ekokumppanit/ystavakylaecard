@@ -164,4 +164,9 @@ if (isset($user) and ! empty($user)) {
         </div>
     </div>
 
-
+    <noscript>
+        <div data-alert class="alert-box alert">
+            Sinulla ei ole selaimesi JavaScript-tuki päällä.<br>
+            <a href="http://www.enable-javascript.com" target="_blank">Katso täältä ohjeet tuen päälle kytkemiseen.</a>
+        </div>
+    </noscript>
