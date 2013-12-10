@@ -3,12 +3,11 @@
     <div class="large-12 small-12 columns">
         <div class="panel">
 
-            <h2>Luo uusi eKortti!</h2>
+            <h2>Luo omasi</h2>
 
-            <p>
-                Suunnittele oma eKorttisi ja lähetä se ystävällesi!
-                Samalla voit osallistua arvontaan josta voit voittaa huikean hienoja palkintoja.
-            </p>
+            <p>Lähettäminen käy helposti alla olevalla lomakkeella. Valitse kuvavaihtoehdoista pohja joulukortillesi ja kirjoita mukaan omat terveisesi vastaanottajalle. Sen jälkeen kortti onkin valmis matkaan!</p>
+
+            <p>Ystäväkylä maksaa sähköpostikulut!</p>
         </div>
     </div>
 </div>

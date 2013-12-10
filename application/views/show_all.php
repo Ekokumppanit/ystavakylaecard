@@ -2,7 +2,8 @@
 
     <div class="large-12 columns">
         <div class="panel">
-            <h2>Tässä kaikki Ystäväkylän sähköpostikortit!</h2>
+            <h2>Lähetetyt kortit</h2>
+            <p>Tällaisia tervehdyksiä on jo lähtenyt, laita sinäkin omasi!</p>
             <p>
                 Postikortit ovat järjestetty luomisjärjestykseen, uusimmat ensimmäiseksi.
                 Tällä hetkellä postikortteja on kaikkiaan <strong><?=$count->all;?></strong> kappaletta joista
