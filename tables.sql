@@ -1,7 +1,7 @@
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
-CREATE TABLE `ystavakyla_ecards` (
+CREATE TABLE IF NOT EXISTS `ystavakyla_ecards__ecards` (
   `id` int(55) NOT NULL AUTO_INCREMENT,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -33,7 +33,7 @@ CREATE TABLE `ystavakyla_ecards` (
   KEY `card_status` (`card_status`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
-CREATE TABLE `ystavakyla_users` (
+CREATE TABLE IF NOT EXISTS `ystavakyla_ecards__users` (
   `id` int(55) NOT NULL AUTO_INCREMENT,
   `username` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `password` varchar(40) CHARACTER SET utf8 DEFAULT NULL,
